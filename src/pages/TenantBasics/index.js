@@ -5,9 +5,12 @@ import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import TenantBasicsSetup from "./TenantBasicsSetup";
+import TenantMediaPlatform from "./TenantMediaPlatform";
 import {observer} from "mobx-react";
+import TenantMarketplace from "./TenantMarketplace";
+import TenantAuthorityService from "./TenantAuthorityService";
 
 const steps = [
   "Setup",
@@ -70,10 +73,12 @@ const TenantBasics = observer(() => {
   console.log("ActiveSetp ", activeStep);
   if(activeStep == 0) {
     page = <TenantBasicsSetup rootStore={rootStore}/>;
-  } else {
-    page = <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-      Step {activeStep + 1}
-    </Typography>;
+  } else if(activeStep == 1) {
+    page = <TenantMediaPlatform rootStore={rootStore}/>;
+  } else if(activeStep == 2) {
+    page = <TenantMarketplace rootStore={rootStore}/>;
+  } else if(activeStep == 3) {
+    page = <TenantAuthorityService rootStore={rootStore}/>;
   }
 
   return (
@@ -137,43 +142,5 @@ const TenantBasics = observer(() => {
     </Box>
   );
 });
-
-const GridLabel = ({text}) => {
-  return (
-    <Grid item xs={4} style={{ minWidth: "200px" }}>
-      <Typography variant="subtile1" gutterBottom>
-        {text}
-      </Typography>
-    </Grid>
-  );
-};
-
-const TenantBasicsSetup = ({rootStore}) => {
-  return (
-    <Box
-      sx={{
-        p: 2,
-      }}
-    >
-      <Typography sx={{ mb: 5 }}>
-        Your base tenant contracts and group have been set up!
-      </Typography>
-      <Grid container rowSpacing={3} columnSpacing={1} sx={{ m: 3 }} >
-        <GridLabel text="Tenant ID" />
-        <Grid item xs={8}>
-          <Typography>
-            {rootStore.tenantInfo.basics.tenantId}
-          </Typography>
-        </Grid>
-        <GridLabel text="Tenant Admins" />
-        <Grid item xs={8}>
-          <Typography>
-            {rootStore.tenantInfo.basics.tenantAdmins.id}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-};
 
 export default TenantBasics;

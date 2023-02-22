@@ -59,17 +59,115 @@ class RootStore {
           tenantName: "",
           tenantAdmins: {id:"igrp12345", members: 12, managers: 12},
           mediaPlatform: {
-            contentTypes:[],
-            libraries:[],
-            groups:[]
+            contentTypes:[
+              {
+                name:"Tenant123 - Title",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Tenant123 - Title Master",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Tenant123 - Title Collection",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Tenant123 - Title Permissions",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Tenant123 - Channel",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Tenant123 - Live Stream",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              }
+            ],
+            libraries:[
+              {
+                name:"Tenant123 - Properties",
+                libraryId: "iq__12345"
+              },
+              {
+                name:"Tenant123 - Masters",
+                libraryId: "iq__12345"
+              },
+              {
+                name:"Tenant123 - Mezzanines",
+                libraryId: "iq__12345"
+              }
+            ],
+            groups:[
+              {
+                name: "Tenant123 - Content Admins"
+              },
+              {
+                name: "Tenant123 - Content Viewers"
+              },
+            ],
+            objects: [
+              {
+                name: "Site - Tenant123"
+              },
+            ]
           },
           marketplace: {
-            contentTypes:[],
-            libraries:[]
+            contentTypes:[
+              {
+                name:"Tenant123 - Eluvio LIVE Drop Event Site",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Tenant123 - Eluvio LIVE Tenant",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Tenant123 - Eluvio LIVE Marketplace",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Tenant123 - NFT Collection",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Tenant123 - NFT Template",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              }
+            ],
+            objects: [
+              {
+                name:"Eluvio LIVE Drop Event Site - Tenant123",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Eluvio LIVE Tenant - Tenant123",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+              {
+                name:"Eluvio LIVE Marketplace - Tenant123",
+                objectId: "iq__12345",
+                latestHash: "hq__12345",
+              },
+            ]
           },
           authorityServices: {
             tenantObject: {
-              id: "iq__12345",
+              objectId: "iq__12345",
               latestHash: "hq__12345"
             },
             minterConfig: {

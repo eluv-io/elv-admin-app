@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import GridLabelItem from "../components/GridLabelItem";
+import GridLabelItem from "../../components/GridLabelItem";
 const TenantBasicsSetup = ({rootStore}) => {
   return (
     <Box
