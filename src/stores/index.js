@@ -12,6 +12,7 @@ class RootStore {
   walletClient;
   loggedIn = false;
   userProfile;
+  tenantInfo;
   loaded = false;
 
   constructor() {
@@ -20,6 +21,7 @@ class RootStore {
       loggedIn: observable,
       userProfile: observable,
       walletClient: observable,
+      tenantInfo: observable,
       loaded: observable
     });
 
@@ -49,6 +51,43 @@ class RootStore {
 
       window.client = this.client;
       window.walletClient = this.walletClient;
+
+      //TEMP: Test data
+      this.tenantInfo = {
+        basics: {
+          tenantId: "iten12345",
+          tenantName: "",
+          tenantAdmins: {id:"igrp12345", members: 12, managers: 12},
+          mediaPlatform: {
+            contentTypes:[],
+            libraries:[],
+            groups:[]
+          },
+          marketplace: {
+            contentTypes:[],
+            libraries:[]
+          },
+          authorityServices: {
+            tenantObject: {
+              id: "iq__12345",
+              latestHash: "hq__12345"
+            },
+            minterConfig: {
+              minter: "ikms1234minter",
+              minterHelperContractAddress: "0x1234minterhelper",
+              proxyOwner: "ikms1234proxyowner",
+              proxyContract: "0x1234proxycontract"
+            }
+          }
+
+        },
+        users: {
+        },
+        groups: {
+        },
+        permissions: {
+        }
+      };
     } catch(error) {
       console.error("Failed to initialize application");
       console.error(error);

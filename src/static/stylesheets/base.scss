@@ -33,7 +33,7 @@ html,
 body,
 .app,
 .app-container {
-  background-color: $white;
+  background-color: $bluegray;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -73,4 +73,25 @@ main {
   color: $blue;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.title {
+  background-color: $white;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 2.5em;
+}
+
+.grid-container {
+  background-color: #2196f3;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  font-size: 30px;
+  padding: 20px;
+  text-align: center;
 }

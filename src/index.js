@@ -6,15 +6,44 @@ import {observer, Provider} from "mobx-react";
 import "Assets/stylesheets/app.scss";
 import * as Stores from "./stores";
 import LeftNavigation from "Components/LeftNavigation";
-import Home from "Components/Home";
 import {PageLoader} from "Components/Loader";
-import GettingStarted from "Components/GettingStarted";
+import TenantBasics from "Pages/TenantBasics";
+import TenantUsers from "Pages/TenantUsers";
+import TenantGroups from "Pages/TenantGroups";
+import TenantPermissions from "Pages/TenantPermissions";
+import MarketplaceBasics from "Pages/MarketplaceBasics";
+import MarketplaceProducts from "Pages/MarketplaceProducts";
+import MarketplacePayments from "Pages/MarketplacePayments";
+import UsageBasics from "Pages/UsageBasics";
+import UsageBilling from "Pages/UsageBilling";
 
 const rootElement = ReactDOM.createRoot(document.getElementById("app"));
 
 export const appRoutes = [
-  {path: "/", Component: <Home />, label: "Home"},
-  {path: "/components", Component: <GettingStarted />, label: "Getting Started"}
+  {
+    section: "Tenant",
+    routes:[
+      {path: "/", Component: <TenantBasics />, label: "Basics"},
+      {path: "/tenant/users", Component: <TenantUsers />, label: "Users"},
+      {path: "/tenant/groups", Component: <TenantGroups />, label: "Groups"},
+      {path: "/tenant/permissions", Component: <TenantPermissions />, label: "Permissions"}
+    ]
+  },
+  {
+    section: "Marketplace",
+    routes:[
+      {path: "/marketplace/basics", Component: <MarketplaceBasics />, label: "Basics"},
+      {path: "/marketplace/products", Component: <MarketplaceProducts />, label: "Products"},
+      {path: "/marketplace/payments", Component: <MarketplacePayments />, label: "Payments"},
+    ]
+  },
+  {
+    section: "Usage",
+    routes:[
+      {path: "/usage/basics", Component: <UsageBasics />, label: "Basics"},
+      {path: "/usage/billing", Component: <UsageBilling />, label: "Billing"},
+    ]
+  }
 ];
 
 const App = observer(() => {
@@ -24,13 +53,15 @@ const App = observer(() => {
     <main>
       <Routes>
         {
-          appRoutes.map(({path, Component}) => (
-            <Route
-              exact={true}
-              key={path}
-              path={path}
-              element={Component}
-            />
+          appRoutes.map(({routes}) => (
+            routes.map(({path, Component}) => (
+              <Route
+                exact={true}
+                key={path}
+                path={path}
+                element={Component}
+              />
+            ))
           ))
         }
       </Routes>

@@ -8,9 +8,12 @@ const LeftNavigation = () => {
     <nav className="navigation">
       <img src={Logo} />
       {
-        appRoutes.map(({path, label}) => (
-          <NavLink to={path} key={path} className={"navigation__link"}>{ label }</NavLink>
-        ))
+        appRoutes.map(({section,routes}) => [
+          <div className={"navigation__section"}> {section}</div>,
+          routes.map(({path, label}) => (
+            <NavLink to={path} key={path} className={"navigation__link"}>{ label }</NavLink>
+          ))
+        ])
       }
     </nav>
   );

@@ -1,11 +1,10 @@
 .navigation {
-  background: $gray3;
+  background: $black;
   display: flex;
   flex-direction: column;
   min-width: 150px;
   padding: 20px 0;
   user-select: none;
-  width: 150px;
 
   &__link {
     align-items: center;
@@ -22,8 +21,20 @@
     }
 
     &.active {
-      background: rgba($white, 80%);
-      color: $gray;
+      background: rgba($blue3, 80%);
+      color: $white;
     }
   }
+
+  &__section{
+    align-items: center;
+    color: $blue3;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.5em;
+    height: 80px;
+    padding: 20px 10px 0 10px;
+    position: relative;
+  }
+
 }
