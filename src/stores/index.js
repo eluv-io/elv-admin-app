@@ -14,6 +14,7 @@ class RootStore {
   userProfile;
   tenantInfo;
   loaded = false;
+  tenantBasicsSteps;
 
   constructor() {
     makeObservable(this, {
@@ -22,7 +23,8 @@ class RootStore {
       userProfile: observable,
       walletClient: observable,
       tenantInfo: observable,
-      loaded: observable
+      loaded: observable,
+      tenantBasicsSteps: observable
     });
 
     this.Initialize();
@@ -168,7 +170,27 @@ class RootStore {
           authorityServices: {
             tenantObject: {
               objectId: "iq__12345",
-              latestHash: "hq__12345"
+              latestHash: "hq__12345",
+              previousVersions: [
+                {
+                  hash:"hq__12345",
+                  version: "622",
+                  commitInfo: {
+                    author: "test-tenant",
+                    commit_message: "update links",
+                    commit_date: "February 24, 2023 at 4:25:11 p.m. EST"
+                  }
+                },
+                {
+                  hash:"hq__12345",
+                  version: "621",
+                  commitInfo: {
+                    author: "test-tenant",
+                    commit_message: "update links",
+                    commit_date: "February 23, 2023 at 2:22:11 p.m. EST"
+                  }
+                }
+              ]
             },
             minterConfig: {
               minter: "ikms1234minter",
@@ -186,6 +208,9 @@ class RootStore {
         permissions: {
         }
       };
+
+      this.tenantBasicsSteps = {};
+
     } catch(error) {
       console.error("Failed to initialize application");
       console.error(error);
@@ -211,6 +236,34 @@ class RootStore {
     this.loggedIn = false;
     this.userProfile = {};
   });
+
+  SetupTenant = flow(function * () {
+    //TODO: setup tenant
+  });
+
+  SetupTenantMarketplace = flow(function * () {
+    //TODO: setup marketplace
+  });
+
+  SetupTenantMediaplatform = flow(function * () {
+    //TODO: setup tenant
+  });
+
+  SetupTenantMinterConfig = flow(function * () {
+    //TODO: setup tenant
+  });
+
+  // eslint-disable-next-line require-yield
+  SetStepComplete = flow(function * ({step}) {
+    let newTenantBasicsSetup = this.tenantBasicsSteps;
+    newTenantBasicsSetup[step] = true;
+    this.tenantBasicsSteps = newTenantBasicsSetup;
+  });
+
+  UpdateTenantLink = flow(function * () {
+
+  });
+
 }
 
 export const rootStore = new RootStore();

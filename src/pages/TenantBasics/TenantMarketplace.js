@@ -3,8 +3,44 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import GridLabelItem from "../../components/GridLabelItem";
+import Button from "@mui/material/Button";
+import {TitleLabel} from "../../components/Labels.js";
 
-const TenantMarketplace = ({rootStore}) => {
+const TenantMarketplace = ({rootStore, stepIndex}) => {
+  if(!rootStore.tenantBasicsSteps[stepIndex]){
+    return (
+      <Box
+        sx={{
+          p: 2,
+        }}
+      >
+        <TitleLabel
+          message="Create the content types and site objects necessary to sell NFTs."
+        />
+
+        <Box
+          sx={{
+            p: 2,
+            m: "auto",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: 300
+          }}
+        >
+          <Button variant="contained"
+            onClick={() => {
+              rootStore.SetupTenantMarketplace();
+              rootStore.SetStepComplete({step:stepIndex});
+            }}
+          >
+            Setup Marketplace
+          </Button>
+        </Box>
+      </Box>
+    );
+  }
+
   return (
     <Box
       sx={{

@@ -4,7 +4,6 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import TenantBasicsSetup from "./TenantBasicsSetup";
 import TenantMediaPlatform from "./TenantMediaPlatform";
@@ -21,7 +20,12 @@ const steps = [
 
 const TenantBasics = observer(() => {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [completed, setCompleted] = React.useState({});
+  //const [completed, setCompleted] = React.useState({});
+  let completed = rootStore.tenantBasicsSteps;
+  const setCompleted = (newCompleted) => {
+    rootStore.tenantBasicsStepts = completed;
+    completed = newCompleted;
+  };
 
   const totalSteps = () => {
     return steps.length;
@@ -57,28 +61,16 @@ const TenantBasics = observer(() => {
     setActiveStep(step);
   };
 
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
-    handleNext();
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-  };
-
   let page;
   console.log("ActiveSetp ", activeStep);
   if(activeStep == 0) {
-    page = <TenantBasicsSetup rootStore={rootStore}/>;
+    page = <TenantBasicsSetup rootStore={rootStore} stepIndex={0} />;
   } else if(activeStep == 1) {
-    page = <TenantMediaPlatform rootStore={rootStore}/>;
+    page = <TenantMediaPlatform rootStore={rootStore} stepIndex={1} />;
   } else if(activeStep == 2) {
-    page = <TenantMarketplace rootStore={rootStore}/>;
+    page = <TenantMarketplace rootStore={rootStore} stepIndex={2} />;
   } else if(activeStep == 3) {
-    page = <TenantAuthorityService rootStore={rootStore}/>;
+    page = <TenantAuthorityService rootStore={rootStore} stepIndex={3} />;
   }
 
   return (
@@ -95,49 +87,28 @@ const TenantBasics = observer(() => {
         </Stepper>
       </Box>
       <div>
-        {allStepsCompleted() ? (
-          <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished
-            </Typography>
+        <Paper elevation={3} >
+          <Box sx={{ p: 3, alignContent:"flex-start"}} >
+            {page}
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Button
+                color="inherit"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+              >
+                Back
+              </Button>
               <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>Reset</Button>
-            </Box>
-          </React.Fragment>
-        ) : (
-          <Paper elevation={3} >
-            <Box sx={{ p: 3, alignContent:"flex-start"}} >
-              {page}
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                <Button
-                  color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Back
-                </Button>
-                <Box sx={{ flex: "1 1 auto" }} />
+              { activeStep < steps.length - 1 ?
                 <Button onClick={handleNext} sx={{ mr: 1 }}>
                   Next
                 </Button>
-                {activeStep !== steps.length &&
-                  (completed[activeStep] ? (
-                    <Typography variant="caption" sx={{ display: "inline-block" }}>
-                      Step {activeStep + 1} already completed
-                    </Typography>
-                  ) : (
-                    <Button onClick={handleComplete}>
-                      {completedSteps() === totalSteps() - 1
-                        ? "Finish"
-                        : "Complete Step"}
-                    </Button>
-                  ))}
-              </Box>
+                : null
+              }
             </Box>
-          </Paper>
-        )}
+          </Box>
+        </Paper>
       </div>
     </Box>
   );

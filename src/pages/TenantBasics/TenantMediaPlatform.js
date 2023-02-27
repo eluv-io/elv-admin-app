@@ -3,7 +3,44 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import GridLabelItem from "../../components/GridLabelItem";
-const TenantMediaPlatform = ({rootStore}) => {
+import Button from "@mui/material/Button";
+import {TitleLabel} from "../../components/Labels.js";
+
+const TenantMediaPlatform = ({rootStore, stepIndex}) => {
+  if(!rootStore.tenantBasicsSteps[stepIndex]){
+    return (
+      <Box
+        sx={{
+          p: 2,
+        }}
+      >
+        <TitleLabel
+          message="Setup your tenancy to be able to stream videos and live channels."
+        />
+
+        <Box
+          sx={{
+            p: 2,
+            m: "auto",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: 300
+          }}
+        >
+          <Button variant="contained"
+            onClick={() => {
+              rootStore.SetupTenantMediaplatform();
+              rootStore.SetStepComplete({step:stepIndex});
+            }}
+          >
+            Setup Media Platform
+          </Button>
+        </Box>
+      </Box>
+    );
+  }
+
   return (
     <Box
       sx={{
