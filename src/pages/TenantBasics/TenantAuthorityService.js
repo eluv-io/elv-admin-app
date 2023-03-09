@@ -32,13 +32,13 @@ const ChoosePreviousVersion = ({previousVersions, open, handleClose}) => {
             name="radio-buttons-group"
           >
             {previousVersions.map(({hash,version,commitInfo}) => (
-              <>
+              <Box key={hash} >
                 <FormControlLabel value={version} control={<Radio />} label={`Version ${version}`} />
                 <FormHelperText sx={{pl:3}} >{`Hash ${hash}`}</FormHelperText>
                 <FormHelperText sx={{pl:3}} >{`Author ${commitInfo.author}`}</FormHelperText>
                 <FormHelperText sx={{pl:3}} >{`Commit Message ${commitInfo.commit_message}`}</FormHelperText>
                 <FormHelperText sx={{pl:3}} >{`Commit Date ${commitInfo.commit_date}`}</FormHelperText>
-              </>
+              </Box>
             ))}
           </RadioGroup>
         </FormControl>
@@ -100,11 +100,12 @@ const TenantAuthorityService = ({rootStore, stepIndex}) => {
     <Box
       sx={{
         p: 2,
+        height: 300
       }}
     >
-      <Typography sx={{ mb: 5 }}>
-        This is your current coniguration.
-      </Typography>
+      <TitleLabel
+        message="This is your current coniguration."
+      />
       <Grid container rowSpacing={3} columnSpacing={1} sx={{ m: 3 }} >
         <GridLabelItem text="Tenant Object" />
         <Grid item xs={5}>

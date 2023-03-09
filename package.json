@@ -20,10 +20,12 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.10",
+    "@mui/x-data-grid": "^6.0.0",
     "mobx": "^6.6.0",
     "mobx-react": "^7.5.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-json-view": "^1.21.3",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {

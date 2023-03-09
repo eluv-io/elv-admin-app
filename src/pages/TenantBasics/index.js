@@ -22,8 +22,9 @@ const TenantBasics = observer(() => {
   const [activeStep, setActiveStep] = React.useState(0);
   //const [completed, setCompleted] = React.useState({});
   let completed = rootStore.tenantBasicsSteps;
+  // eslint-disable-next-line no-unused-vars
   const setCompleted = (newCompleted) => {
-    rootStore.tenantBasicsStepts = completed;
+    rootStore.tenantBasicsSteps = completed;
     completed = newCompleted;
   };
 

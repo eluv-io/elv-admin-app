@@ -13,6 +13,7 @@ class RootStore {
   loggedIn = false;
   userProfile;
   tenantInfo;
+  marketplaceInfo;
   loaded = false;
   tenantBasicsSteps;
 
@@ -23,6 +24,7 @@ class RootStore {
       userProfile: observable,
       walletClient: observable,
       tenantInfo: observable,
+      marketplaceInfo: observable,
       loaded: observable,
       tenantBasicsSteps: observable
     });
@@ -210,6 +212,65 @@ class RootStore {
       };
 
       this.tenantBasicsSteps = {};
+
+      //TEMP: Test data
+      this.marketplaceInfo = {
+        basics:{
+          sales: {
+            contractAddress: "0x11233",
+            stakeholders: [
+              {id: "0x1234", address:"0x123423423535346", releasable: 159, released:6.0},
+              {id:"0x3456", address:"0x3456", releasable: 45, released:6.0},
+              {id:"0x4567", address:"0x4567", releasable: 76, released:6.0},
+              {id:"0x5678", address:"0x5678", releasable: 87, released:6.0},
+              {id:"0x1236", address:"0x1236", releasable: 98, released:6.0},
+              {id:"0x1237", address:"0x1237", releasable: 67, released:6.0},
+              {id:"0x1238", address:"0x1238", releasable: 64, released:6.0},
+            ]
+          },
+          royalties: {
+            contractAddress: "0x11234",
+            stakeholders: [
+              {id: "0x1234", address:"0x1234", releasable: 87, released:6.0},
+              {id:"0x3456", address:"0x2345", releasable: 56, released:6.0},
+              {id:"0x4567", address:"0x4567", releasable: 83, released:6.0},
+              {id:"0x5678", address:"0x5678", releasable: 65, released:6.0},
+              {id:"0x1236", address:"0x3284", releasable: 22, released:6.0},
+              {id:"0x1237", address:"0x7240", releasable: 54, released:6.0},
+              {id:"0x1238", address:"0x2490", releasable: 77, released:6.0},
+            ]
+          },
+          marketplaces: [
+            {id: "iq__1234", name:"My Store 1", items: 87, status: "good"},
+            {id:"iq__3456", name:"My Store 2", items: 56, status: "good", errors:[], warnings:[]},
+            {id:"iq__4567", name:"My Store 3", items: 83, status: "2 errors, 1 warning", errors:["error 1", "error 2"], warnings:["warning 1"]},
+            {id:"iq__5678", name:"My Store 4", items: 65, status: "1 error, 2 warning", errors:["error 1"], warnings:["warning 1", "warning 2"]},
+            {id:"iq__1236", name:"My Store 5", items: 22, status: "good"},
+            {id:"iq__1237", name:"My Store 6", items: 54, status: "good"},
+            {id:"iq__1238", name:"My Store 7", items: 77, status: "good"},
+          ],
+          settings:{
+            leaderboard_excludes: [
+              "0xb37c256c91a9b623ffb03158d9002917bca49b5d",
+              "0xb091756c91a9b623ffb03158d9002917bca49b5d",
+              "0x20dea119872cf855c8f802a1aba3b43f691e181d"
+            ],
+            min_list_price: null,
+            minter: {
+              shuffle_seed: "creative seeding",
+              shuffle_token_id: true,
+              use_mint_ordinal_in_token_id: true
+            },
+            owners: [
+              "0x59e79eFE007F5208857a646Db5cBddA82261Ca81",
+              "0x5557f80d0537e7bb439d919841e0eb9ed449e6bb"
+            ],
+            revenue_addr: "0xee142f26f720200022f3f96ee8dc9d666b8949be",
+            royalty: 10,
+            royalty_addr: "0x904736f613c9aac4a4ba047905f13c032ab81a42"
+          }
+        }
+      };
 
     } catch(error) {
       console.error("Failed to initialize application");
