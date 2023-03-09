@@ -5,9 +5,8 @@ import Box from "@mui/material/Box";
 import {TitleLabel} from "../../components/Labels.js";
 import Grid from "@mui/material/Grid";
 import GridLabelItem from "../../components/GridLabelItem";
-import ReactJson from 'react-json-view'
+import ReactJson from "react-json-view";
 import { DataGrid } from "@mui/x-data-grid";
-import { Typography } from "@mui/material";
 
 /*
 import Table from "@mui/material/Table";
