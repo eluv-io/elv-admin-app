@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {HashRouter, Route, Routes} from "react-router-dom";
 import {observer, Provider} from "mobx-react";
+import {EluvioConfiguration} from "../configuration";
 
 import "Assets/stylesheets/app.scss";
 import * as Stores from "./stores";
@@ -19,7 +20,7 @@ import UsageBilling from "Pages/UsageBilling";
 
 const rootElement = ReactDOM.createRoot(document.getElementById("app"));
 
-export const appRoutes = [
+export var appRoutes = [
   {
     section: "Tenant",
     routes:[
@@ -45,6 +46,24 @@ export const appRoutes = [
     ]
   }
 ];
+
+console.log(EluvioConfiguration["mode"]);
+if(EluvioConfiguration["mode"] == "production") {
+  appRoutes = [
+    {
+      section: "Tenant",
+      routes:[
+        {path: "/", Component: <TenantBasics />, label: "Basics"},
+      ]
+    },
+    {
+      section: "Marketplace",
+      routes:[
+        {path: "/marketplace/basics", Component: <MarketplaceBasics />, label: "Basics"},
+      ]
+    }
+  ];
+}
 
 const App = observer(() => {
   if(!rootStore.loaded) { return <PageLoader />; }

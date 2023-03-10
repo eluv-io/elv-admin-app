@@ -1,5 +1,5 @@
 import {makeObservable, flow, configure, observable} from "mobx";
-import {ElvWalletClient} from "@eluvio/elv-client-js";
+//import {ElvWalletClient} from "@eluvio/elv-client-js";
 import {FrameClient} from "@eluvio/elv-client-js/src/FrameClient";
 
 // Force strict mode so mutations are only allowed within actions.
@@ -32,6 +32,7 @@ class RootStore {
     this.Initialize();
   }
 
+  // eslint-disable-next-line require-yield
   Initialize = flow(function * () {
     try {
       // Determine whether your application needs FrameClient or
@@ -48,13 +49,15 @@ class RootStore {
       // ElvWalletClient is a standalone client for using Eluvio Media
       // Wallet functionality
       //
+      /*
       this.walletClient = yield ElvWalletClient.Initialize({
         network: EluvioConfiguration.network,
         mode: EluvioConfiguration.mode
       });
+      */
 
       window.client = this.client;
-      window.walletClient = this.walletClient;
+      //window.walletClient = this.walletClient;
 
       //TEMP: Test data
       this.tenantInfo = {
