@@ -63,7 +63,6 @@ const TenantBasics = observer(() => {
   };
 
   let page;
-  console.log("ActiveSetp ", activeStep);
   if(activeStep == 0) {
     page = <TenantBasicsSetup rootStore={rootStore} stepIndex={0} />;
   } else if(activeStep == 1) {

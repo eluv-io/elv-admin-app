@@ -2,8 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {HashRouter, Route, Routes} from "react-router-dom";
 import {observer, Provider} from "mobx-react";
-import {EluvioConfiguration} from "../configuration";
-
+import EluvioConfiguration from "../configuration";
 import "Assets/stylesheets/app.scss";
 import * as Stores from "./stores";
 import LeftNavigation from "Components/LeftNavigation";
