@@ -1,21 +1,23 @@
 import {makeObservable, flow, configure, observable} from "mobx";
-//import {ElvWalletClient} from "@eluvio/elv-client-js";
-import {FrameClient} from "@eluvio/elv-client-js/src/FrameClient";
+import { makePersistable } from "mobx-persist-store";
 
 // Force strict mode so mutations are only allowed within actions.
 configure({
   enforceActions: "always"
 });
 
-class RootStore {
+export class RootStore {
   client;
   walletClient;
+  elvLive;
+  authService;
   loggedIn = false;
   userProfile;
   tenantInfo;
   marketplaceInfo;
   loaded = false;
   tenantBasicsSteps;
+  config = {}
 
   constructor() {
     makeObservable(this, {
@@ -23,41 +25,26 @@ class RootStore {
       loggedIn: observable,
       userProfile: observable,
       walletClient: observable,
+      elvLive: observable,
       tenantInfo: observable,
       marketplaceInfo: observable,
       loaded: observable,
-      tenantBasicsSteps: observable
+      tenantBasicsSteps: observable,
+      config: observable,
+      authService: observable
     });
 
-    this.Initialize();
+    makePersistable(this, { name: "RootStore", properties: ["tenantInfo", "marketplaceInfo", "tenantBasicsSteps"], storage: window.localStorage });
   }
 
   // eslint-disable-next-line require-yield
-  Initialize = flow(function * () {
+  Initialize = flow(function * ({client, config, elvLive, authService}) {
     try {
-      // Determine whether your application needs FrameClient or
-      // ElvWalletClient
-
-      // FrameClient is a client that looks like ElvClient but, under the
-      // hood, passes messages to another frame with an actual ElvClient
-      //
-      this.client = new FrameClient({
-        target: window.parent,
-        timeout: 30
-      });
-
-      // ElvWalletClient is a standalone client for using Eluvio Media
-      // Wallet functionality
-      //
-      /*
-      this.walletClient = yield ElvWalletClient.Initialize({
-        network: EluvioConfiguration.network,
-        mode: EluvioConfiguration.mode
-      });
-      */
-
-      window.client = this.client;
-      //window.walletClient = this.walletClient;
+      console.log("RootStore Initialize()");
+      this.client = client;
+      this.elvLive = elvLive;
+      this.config = config;
+      this.authService = authService;
 
       //TEMP: Test data
       this.tenantInfo = {
@@ -275,6 +262,8 @@ class RootStore {
         }
       };
 
+      console.log("Minter Config: ", this.authService.GetTenantConfigMinter({tenant:this.tenantInfo.basics.tenantId}));
+
     } catch(error) {
       console.error("Failed to initialize application");
       console.error(error);
@@ -301,6 +290,20 @@ class RootStore {
     this.userProfile = {};
   });
 
+  SetTenantId = flow(function *(tenantId) {
+    let tenantInfo = this.tenantInfo;
+    tenantInfo.basics.tenantId = tenantId;
+    this.tenantInfo =  tenantInfo;
+    yield this.Refresh();
+  });
+
+  Refresh = flow(function *(tenantId) {
+    if(!tenantId || tenantId === ""){
+      return;
+    }
+    yield Initialize({client:this.client, config:this.config, elvLive:this.elvLive, authService:this.authService});
+  });
+
   SetupTenant = flow(function * () {
     //TODO: setup tenant
   });
@@ -318,9 +321,10 @@ class RootStore {
   });
 
   // eslint-disable-next-line require-yield
-  SetStepComplete = flow(function * ({step}) {
+  SetStepComplete = flow(function * ({step, value=true}) {
+    console.log("SetStepComplete: ", step);
     let newTenantBasicsSetup = this.tenantBasicsSteps;
-    newTenantBasicsSetup[step] = true;
+    newTenantBasicsSetup[step] = value;
     this.tenantBasicsSteps = newTenantBasicsSetup;
   });
 
@@ -329,7 +333,3 @@ class RootStore {
   });
 
 }
-
-export const rootStore = new RootStore();
-
-window.rootStore = rootStore;

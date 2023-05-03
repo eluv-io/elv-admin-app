@@ -4,7 +4,7 @@ A project template for creating an Eluvio application using React, Mobx, and elv
 
 ### Prerequisites
 
-- Node.js version 16 or 18
+- Node.js version 16
 - NPM 8 or higher
 
 ### Setup
@@ -28,7 +28,7 @@ elv-starter-app
 └── src
 ```
 
-By default, WalletClient and ElvClient are initialized in the RootStore, which require the following configuration:
+By default, WalletClient and ElvClient are initialized in the RootStore, which require the following configuration.js:
 ```
 const EluvioConfiguration = {
   "config-url": <node-config-url>,
@@ -36,6 +36,8 @@ const EluvioConfiguration = {
   "network": "main" | "demo",
   "mode": "staging" | "production"
 };
+
+export default EluvioConfiguration;
 ```
 
 ### Installation

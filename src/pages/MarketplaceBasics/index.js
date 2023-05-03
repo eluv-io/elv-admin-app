@@ -5,8 +5,9 @@ import Box from "@mui/material/Box";
 import {TitleLabel} from "../../components/Labels.js";
 import Grid from "@mui/material/Grid";
 import GridLabelItem from "../../components/GridLabelItem";
-import ReactJson from "react-json-view";
 import { DataGrid } from "@mui/x-data-grid";
+import { JsonView, darkStyles } from "react-json-view-lite";
+import "react-json-view-lite/dist/index.css";
 
 /*
 import Table from "@mui/material/Table";
@@ -134,7 +135,7 @@ const MarketplaceBasics = observer(() => {
               text="Settings"
             />
             <Grid item xs={8}>
-              <ReactJson name={null} src={rootStore.marketplaceInfo.basics.settings} />
+              <JsonView data={rootStore.marketplaceInfo.basics.settings} style={darkStyles}/>
             </Grid>
           </Grid>
         </Box>

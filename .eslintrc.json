@@ -14,6 +14,11 @@
   "plugins": [
     "react"
   ],
+  "ignorePatterns": [
+    "node_modules/",
+    "**/*.min.js",
+    "**/lib/*.js"
+  ],
   "rules": {
     "eol-last": "warn",
     "indent": [
@@ -21,28 +26,43 @@
       2,
       {
         "SwitchCase": 1,
-        "ignoredNodes": ["TemplateLiteral"]
+        "ignoredNodes": [
+          "TemplateLiteral"
+        ]
       }
     ],
     "keyword-spacing": [
-      "warn", {
+      "warn",
+      {
         "before": true,
         "after": true,
         "overrides": {
-          "if": { "after":  false },
-          "for": { "after": false },
-          "while": { "after":  false },
-          "switch": { "after": false },
-          "catch": { "after": false }
+          "if": {
+            "after": false
+          },
+          "for": {
+            "after": false
+          },
+          "while": {
+            "after": false
+          },
+          "switch": {
+            "after": false
+          },
+          "catch": {
+            "after": false
+          }
         }
-      }],
+      }
+    ],
     "linebreak-style": [
       "error",
       "unix"
     ],
     "no-case-declarations": "off",
     "no-multiple-empty-lines": [
-      "warn", {
+      "warn",
+      {
         "max": 1
       }
     ],

@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client";
 import {HashRouter, Route, Routes} from "react-router-dom";
 import {observer, Provider} from "mobx-react";
 import EluvioConfiguration from "../configuration";
+import {FrameClient} from "@eluvio/elv-client-js/src/FrameClient";
+import ElvLive from "./clients/ElvLive";
+
 import "Assets/stylesheets/app.scss";
 import * as Stores from "./stores";
 import LeftNavigation from "Components/LeftNavigation";
@@ -16,6 +19,23 @@ import MarketplaceProducts from "Pages/MarketplaceProducts";
 import MarketplacePayments from "Pages/MarketplacePayments";
 import UsageBasics from "Pages/UsageBasics";
 import UsageBilling from "Pages/UsageBilling";
+import AuthorityApi from "./clients/AuthorityApi";
+
+var config = EluvioConfiguration;
+
+var client = new FrameClient({
+  target: window.parent,
+  timeout: 30
+});
+window.client = client;
+
+var elvLive = new ElvLive({config});
+var authService = new AuthorityApi({client,config});
+
+var rootStore = new Stores.RootStore();
+rootStore.Initialize({client,config,elvLive,authService});
+
+window.rootStore = rootStore;
 
 const rootElement = ReactDOM.createRoot(document.getElementById("app"));
 
@@ -46,8 +66,9 @@ export var appRoutes = [
   }
 ];
 
-console.log(EluvioConfiguration["mode"]);
-if(EluvioConfiguration["mode"] == "production") {
+console.log("Configuration: ", config["mode"]);
+
+if(config["mode"] == "production") {
   appRoutes = [
     {
       section: "Tenant",
@@ -65,6 +86,7 @@ if(EluvioConfiguration["mode"] == "production") {
 }
 
 const App = observer(() => {
+
   if(!rootStore.loaded) { return <PageLoader />; }
 
   return (

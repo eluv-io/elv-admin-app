@@ -10,6 +10,7 @@ import TenantMediaPlatform from "./TenantMediaPlatform";
 import {observer} from "mobx-react";
 import TenantMarketplace from "./TenantMarketplace";
 import TenantAuthorityService from "./TenantAuthorityService";
+import Stack from "@mui/material/Stack";
 
 const steps = [
   "Setup",
@@ -74,7 +75,7 @@ const TenantBasics = observer(() => {
   }
 
   return (
-    <Box sx={{ width: "100%"}}>
+    <Box sx={{ width: "auto"}}>
       <Box sx={{ m: 0, p: 3 }}>
         <Stepper nonLinear activeStep={activeStep}>
           {steps.map((label, index) => (
@@ -88,9 +89,10 @@ const TenantBasics = observer(() => {
       </Box>
       <div>
         <Paper elevation={3} >
-          <Box sx={{ p: 3, alignContent:"flex-start"}} >
+          <Box sx={{ display: "flex", flexDirection: "column", p: 3, alignContent:"flex-start", minHeight: 500}} >
             {page}
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Box sx={{ flex: "1 1 auto" }} />
+            <Stack direction="row" alignItems="center" spacing={5}>
               <Button
                 color="inherit"
                 disabled={activeStep === 0}
@@ -106,7 +108,7 @@ const TenantBasics = observer(() => {
                 </Button>
                 : null
               }
-            </Box>
+            </Stack>
           </Box>
         </Paper>
       </div>
