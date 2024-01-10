@@ -2,6 +2,7 @@ const Path = require("path");
 const webpack = require("webpack");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   target: "web",
@@ -40,6 +41,10 @@ module.exports = {
       filename: "index.html",
       favicon: "./src/static/icons/favicon.png",
     }),
+    new MiniCssExtractPlugin({
+      filename: "styles.css",
+      chunkFilename: "styles.css"
+    }),
     new webpack.ProvidePlugin({
       process: "process/browser"
     })
@@ -73,13 +78,21 @@ module.exports = {
         }
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.scss$/,
         use: [
           "style-loader",
           "css-loader",
           "sass-loader"
         ]
       },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader", "postcss-loader",
+          ],
+      },
+
       {
         test: /\.svg$/,
         loader: "svg-inline-loader"

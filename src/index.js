@@ -19,7 +19,10 @@ import MarketplaceProducts from "Pages/MarketplaceProducts";
 import MarketplacePayments from "Pages/MarketplacePayments";
 import UsageBasics from "Pages/UsageBasics";
 import UsageBilling from "Pages/UsageBilling";
+import UsageActions from "Pages/UsageActions";
 import AuthorityApi from "./clients/AuthorityApi";
+
+import './twstyles.css';
 
 var config = EluvioConfiguration;
 
@@ -62,6 +65,7 @@ export var appRoutes = [
     routes:[
       {path: "/usage/basics", Component: <UsageBasics />, label: "Basics"},
       {path: "/usage/billing", Component: <UsageBilling />, label: "Billing"},
+      {path: "/usage/actions", Component: <UsageActions />, label: "Actions"}
     ]
   }
 ];

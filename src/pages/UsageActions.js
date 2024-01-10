@@ -2,10 +2,11 @@ import React from "react";
 
 const TenantBasics = () => {
   return (
-    <h1 className="text-2xl font-bold underline">
-    Usage Billing new
-    </h1>
+    <div>
+    Usage Actions
+    </div>
   );
 };
 
 export default TenantBasics;
+
