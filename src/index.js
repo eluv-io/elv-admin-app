@@ -22,7 +22,7 @@ import UsageBilling from "Pages/UsageBilling";
 import UsageActions from "Pages/UsageActions";
 import AuthorityApi from "./clients/AuthorityApi";
 
-import './twstyles.css';
+import "./twstyles.css";
 
 var config = EluvioConfiguration;
 
