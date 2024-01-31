@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {HashRouter, Route, Routes} from "react-router-dom";
 import {observer, Provider} from "mobx-react";
-import EluvioConfiguration from "../configuration";
+import {EluvioConfiguration} from "../configuration";
 import {FrameClient} from "@eluvio/elv-client-js/src/FrameClient";
 import ElvLive from "./clients/ElvLive";
 
@@ -20,6 +20,9 @@ import MarketplacePayments from "Pages/MarketplacePayments";
 import UsageBasics from "Pages/UsageBasics";
 import UsageBilling from "Pages/UsageBilling";
 import UsageActions from "Pages/UsageActions";
+import UsageCollapsible from "Pages/UsageCollapsible";
+import DemoPage from "Pages/UsageDataTable";
+import UsageActionsTable from "Pages/UsageActionsTable";
 import AuthorityApi from "./clients/AuthorityApi";
 
 import "./twstyles.css";
@@ -65,7 +68,11 @@ export var appRoutes = [
     routes:[
       {path: "/usage/basics", Component: <UsageBasics />, label: "Basics"},
       {path: "/usage/billing", Component: <UsageBilling />, label: "Billing"},
-      {path: "/usage/actions", Component: <UsageActions />, label: "Actions"}
+      {path: "/usage/actions", Component: <UsageActionsTable />, label: "Actions"},
+      {path: "/usage/demo", Component: <DemoPage />, label: "Demo"},
+
+      {path: "/usage/collapsible", Component: <UsageCollapsible />, label: "Collapsible"},
+
     ]
   }
 ];
