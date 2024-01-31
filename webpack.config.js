@@ -54,19 +54,24 @@ module.exports = {
       "process": "process/browser",
       Assets: Path.resolve(__dirname, "src/static"),
       Components: Path.resolve(__dirname, "src/components"),
-      Pages: Path.resolve(__dirname, "src/pages")
+      Pages: Path.resolve(__dirname, "src/pages"),
+      Ui: Path.resolve(__dirname, "src/ui"),
+      "@": Path.resolve(__dirname, "src/@") 
     },
     fallback: {
       "fs": false,
       "stream": require.resolve("stream-browserify"),
       "crypto": require.resolve("crypto-browserify")
     },
-    extensions: [".js", ".jsx", ".scss", ".png", ".svg"]
+    extensions: [".tsx", ".ts", ".js", ".jsx", ".scss", ".png", ".svg"]
   },
+  // entry: "./src/index.tsx",
+  // entry: "./src/index.js",
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|ts)x?$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
