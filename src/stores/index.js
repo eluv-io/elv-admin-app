@@ -16,11 +16,9 @@ export class RootStore {
   client;
   walletClient;
 
-
   authService;
-  
-  networkInfo;
 
+  networkInfo;
 
   loggedIn = false;
   userProfile;
@@ -63,8 +61,7 @@ export class RootStore {
 
       this.networkInfo = yield this.client.NetworkInfo();
 
-
-      configUrl: config["config-url"],
+      config["config-url"],
       console.log("configUrl: ", config["config-url"]);
 
       this.config = config;
@@ -73,14 +70,12 @@ export class RootStore {
 
       this.authService = new AuthorityApi({client: client, config: config, asUrl: config.authorityServiceUrl});
 
-
-      let address =  yield this.client.CurrentAccountAddress()
+      let address =  yield this.client.CurrentAccountAddress();
       console.log(" currentAccountAddress:", address);
 
       const configUrl = yield client.ConfigUrl();
-      console.log("configUrl: ", configUrl)
+      console.log("configUrl: ", configUrl);
       const newClient = yield ElvClient.FromConfigurationUrl({configUrl});
-      
 
       //TEMP: Test data
       this.tenantInfo = {
@@ -299,9 +294,8 @@ export class RootStore {
       };
 
       console.log("Tenant Id: ", this.tenantInfo.basics.tenantId);
-      
-      //console.log("Minter Config: ", yield this.authService.GetTenantConfigMinter({tenant:"iten4TXq2en3qtu3JREnE5tSLRf9zLod"}));
 
+      //console.log("Minter Config: ", yield this.authService.GetTenantConfigMinter({tenant:"iten4TXq2en3qtu3JREnE5tSLRf9zLod"}));
 
     } catch(error) {
       console.error("Failed to initialize application");
@@ -374,18 +368,17 @@ export class RootStore {
   GetActionsData = flow(function * () {
     console.log("GetActionsData");
 
-
     let actions = yield this.authService.TenantActionsReport({
-      tenant: "", // TODO: test hard coded, fix 
+      tenant: "", // TODO: test hard coded, fix
       actions: "nft-open,nft-buy,nft-claim,nft-redeem,nft-offer-redeem,vote-drop",
       start_date: "2024-01-01",
       end_date: "2024-01-31"
-     });
+    });
 
     console.log("Actions: ", actions);
 
     return actions;
-    
+
   });
 
 }

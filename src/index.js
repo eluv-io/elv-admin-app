@@ -29,9 +29,7 @@ var config = EluvioConfiguration;
 
 console.log("Configuration: ", config);
 
-
 var rootStore = new Stores.RootStore();
-
 
 rootStore.Initialize({config});
 
@@ -39,8 +37,8 @@ window.rootStore = rootStore;
 
 let rootElement = null; // ReactDOM.Root
 const root = document.getElementById("app");
-if (root) {
-   rootElement = ReactDOM.createRoot(root);
+if(root) {
+  rootElement = ReactDOM.createRoot(root);
 }
 
 export var appRoutes = [
@@ -118,17 +116,17 @@ const App = observer(() => {
   );
 });
 
-if (rootElement) {
+if(rootElement) {
   rootElement.render(
-  <Provider {...Stores}>
-    <React.StrictMode>
-      <HashRouter>
-        <div className="app-container">
-          <LeftNavigation />
-          <App />
-        </div>
-      </HashRouter>
-    </React.StrictMode>
-  </Provider>
-)
-  };
+    <Provider {...Stores}>
+      <React.StrictMode>
+        <HashRouter>
+          <div className="app-container">
+            <LeftNavigation />
+            <App />
+          </div>
+        </HashRouter>
+      </React.StrictMode>
+    </Provider>
+  );
+}
