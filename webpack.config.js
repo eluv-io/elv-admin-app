@@ -31,7 +31,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: Path.join(__dirname, "configuration.js"), to: Path.join(__dirname, "dist", "configuration.js") }
+        { from: Path.join(__dirname, "configuration.ts"), to: Path.join(__dirname, "dist", "configuration.ts") }
       ]
     }),
     new HTMLWebpackPlugin({

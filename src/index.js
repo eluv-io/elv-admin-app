@@ -3,8 +3,7 @@ import ReactDOM from "react-dom/client";
 import {HashRouter, Route, Routes} from "react-router-dom";
 import {observer, Provider} from "mobx-react";
 import {EluvioConfiguration} from "../configuration";
-import {FrameClient} from "@eluvio/elv-client-js/src/FrameClient";
-import ElvLive from "./clients/ElvLive";
+// import {FrameClient} from "@eluvio/elv-client-js/src/FrameClient";
 
 import "Assets/stylesheets/app.scss";
 import * as Stores from "./stores";
@@ -28,21 +27,21 @@ import "./twstyles.css";
 
 var config = EluvioConfiguration;
 
-var client = new FrameClient({
-  target: window.parent,
-  timeout: 30
-});
-window.client = client;
+console.log("Configuration: ", config);
 
-var elvLive = new ElvLive({config});
-var authService = new AuthorityApi({client,config});
 
 var rootStore = new Stores.RootStore();
-rootStore.Initialize({client,config,elvLive,authService});
+
+
+rootStore.Initialize({config});
 
 window.rootStore = rootStore;
 
-const rootElement = ReactDOM.createRoot(document.getElementById("app"));
+let rootElement = null; // ReactDOM.Root
+const root = document.getElementById("app");
+if (root) {
+   rootElement = ReactDOM.createRoot(root);
+}
 
 export var appRoutes = [
   {
@@ -119,7 +118,8 @@ const App = observer(() => {
   );
 });
 
-rootElement.render(
+if (rootElement) {
+  rootElement.render(
   <Provider {...Stores}>
     <React.StrictMode>
       <HashRouter>
@@ -130,4 +130,5 @@ rootElement.render(
       </HashRouter>
     </React.StrictMode>
   </Provider>
-);
+)
+  };

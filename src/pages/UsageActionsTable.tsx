@@ -43,6 +43,7 @@ import { cn } from "@/lib/utils"
 
 import { getActionsData } from "./ActionsData"
 
+import { rootStore } from "../store"
 
 type ActionsCount = {
   buy: number;
@@ -66,7 +67,11 @@ const ActionsPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result : Actions[] = await getActionsData();
+        let rootStore: RootStore = (window as any).rootStore;
+
+        const result : Actions[] = await rootStore.GetActionsData();
+
+        console.log("result: ", result);
 
         let count : ActionsCount = {
           buy: 0,
